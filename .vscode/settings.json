@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "qwidget": "cpp",
+        "qpainter": "cpp",
+        "qgridlayout": "cpp"
+    }
+}
