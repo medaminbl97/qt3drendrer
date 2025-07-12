@@ -74,16 +74,16 @@ public:
     }
 
     static QPolygon projectTo2D(const Triangle& tri, const QPoint& origin)
-    {
-        QPoint p0(origin.x() + static_cast<int>(tri.v0.x),
-                origin.y() - static_cast<int>(tri.v0.y));
-        QPoint p1(origin.x() + static_cast<int>(tri.v1.x),
-                origin.y() - static_cast<int>(tri.v1.y));
-        QPoint p2(origin.x() + static_cast<int>(tri.v2.x),
-                origin.y() - static_cast<int>(tri.v2.y));
+        {
+            QPoint p0(origin.x() + static_cast<int>(tri.v0.x),
+                    origin.y() - static_cast<int>(tri.v0.y));
+            QPoint p1(origin.x() + static_cast<int>(tri.v1.x),
+                    origin.y() - static_cast<int>(tri.v1.y));
+            QPoint p2(origin.x() + static_cast<int>(tri.v2.x),
+                    origin.y() - static_cast<int>(tri.v2.y));
 
-        QPolygon polygon;
-        polygon << p0 << p1 << p2;
-        return polygon;
-    }
+            QPolygon polygon;
+            polygon << p0 << p1 << p2;
+            return polygon;
+        }
 };

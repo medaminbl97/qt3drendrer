@@ -77,3 +77,19 @@ QPoint BaseModel::getOrigin() const
     int centerY = graphicsView->height() / 2;
     return QPoint(centerX, centerY);
 }
+
+void BaseModel::loadModelFromOBJ(const std::string& path)
+{
+    // Parse .obj
+    // Compute bounding box (minX, maxX, minY, maxY, minZ, maxZ)
+    // Find largest dimension (e.g., max(maxX - minX, maxY - minY, maxZ - minZ))
+    // Compute scale factor to make largest dimension = 100
+    // Apply scaling and offset so center is at (0, 0, 0)
+    // Store triangles in m_trangles
+
+    // Example placeholder logic
+    // for each vertex v:
+    // v.x = (v.x - centerX) * scale
+    // v.y = (v.y - centerY) * scale
+    // v.z = (v.z - centerZ) * scale
+}
