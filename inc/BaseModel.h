@@ -8,19 +8,21 @@
 
 class BaseModel
 {
-private:
+protected:
     QTimer m_timer;
     TransformMatrix m_tmatrix;
     std::vector<Triangle> m_triangles;
     QGraphicsView * graphicsView;
 public:
     BaseModel(QGraphicsView * graphicsView);
+    void BaseModel::loadModelFromOBJ(const std::string& path);
     virtual ~BaseModel() = 0;
     virtual void draw() const;
     virtual void rotateX(float angle) const;
     virtual void rotateY(float angle) const;
     virtual void rotateZ(float angle) const;
     virtual void rotateZ(float angle) const;
+
 private:
     QPoint getOrigin() const;
 };
