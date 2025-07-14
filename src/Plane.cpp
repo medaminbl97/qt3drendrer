@@ -2,8 +2,8 @@
 #include "Vec3.h"
 #include "Triangle.h"
 
-Plane::Plane(QGraphicsView* graphicsView)
-    : BaseModel(graphicsView)
+Plane::Plane(const QString& name)
+    : BaseModel(name)
 {
     // Define default vertices (simple 1x1 plane centered at origin)
     Vec3 v0(0, 0, 0);

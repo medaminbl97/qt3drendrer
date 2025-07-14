@@ -5,22 +5,27 @@
 #include <QPoint>
 #include "Triangle.h"
 #include "TransformMatrix.h"
+#include "ModelView.h"
 
 class BaseModel
 {
+public:
+    QString m_name;
 protected:
     QTimer m_timer;
-    TransformMatrix m_tmatrix;
     std::vector<Triangle> m_triangles;
-    QGraphicsView * graphicsView;
+    ModelView * m_modelview;
+    bool m_tabOpened;
 public:
-    BaseModel(QGraphicsView * graphicsView);
-    void BaseModel::loadModelFromOBJ(const std::string& path);
+    BaseModel(const QString& name = "no_name");
+    void loadModelFromOBJ(const std::string& path);
+    ModelView * getTab();
+    bool isTabOpened() const;
+    void setTabOpened(bool value);
     virtual ~BaseModel() = 0;
     virtual void draw() const;
     virtual void rotateX(float angle) const;
     virtual void rotateY(float angle) const;
-    virtual void rotateZ(float angle) const;
     virtual void rotateZ(float angle) const;
 
 private:

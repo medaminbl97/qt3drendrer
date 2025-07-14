@@ -33,28 +33,9 @@
        <property name="enabled">
         <bool>true</bool>
        </property>
-       <column>
-        <property name="text">
-         <string>Models</string>
-        </property>
-        <property name="font">
-         <font>
-          <kerning>true</kerning>
-         </font>
-        </property>
-        <property name="foreground">
-         <brush brushstyle="NoBrush">
-          <color alpha="255">
-           <red>0</red>
-           <green>0</green>
-           <blue>0</blue>
-          </color>
-         </brush>
-        </property>
-        <property name="icon">
-         <iconset theme="QIcon::ThemeIcon::FolderOpen"/>
-        </property>
-       </column>
+       <property name="tabKeyNavigation">
+        <bool>false</bool>
+       </property>
       </widget>
      </item>
      <item>

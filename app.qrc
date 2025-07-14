@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/plane.png</file>
+        <file>icons/cube.png</file>
+        <file>icons/torus.png</file>
+        <file>icons/obj.png</file>
+        <file>icons/3d-model.png</file>
+        <file>icons/rx.png</file>
+        <file>icons/ry.png</file>
+        <file>icons/rz.png</file>
+    </qresource>
+</RCC>

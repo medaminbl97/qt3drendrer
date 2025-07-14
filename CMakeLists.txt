@@ -4,6 +4,7 @@ project(qt3drenderer VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 qt_standard_project_setup()
@@ -18,6 +19,7 @@ file(GLOB_RECURSE HEADERS CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/inc/*.h
 file(GLOB_RECURSE UIS CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/*.ui")
 
 qt_add_executable(qt3drenderer
+    app.qrc
     ${SOURCES}
     ${HEADERS}
     ${UIS}

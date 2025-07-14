@@ -1,8 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <iostream>
+#include <vector>
+
 #include <QWidget>
-#include "modelview.h"
+#include <QTreeWidgetItem>
+#include "ModelViewTabs.h"
+#include "ModelsDialog.h"
+#include "BaseModel.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
@@ -10,15 +16,26 @@ QT_END_NAMESPACE
 class Widget : public QWidget
 {
     Q_OBJECT
-
+    std::vector< BaseModel* > m_models;
 public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
     void onAddModelBtnClicked();
+    void addModelItemToTree(const QString &name, const QIcon &icon, BaseModel *model);
+    void onModelItemClicked(QTreeWidgetItem *item, int column);
+
+
+
+private slots:
+    void onPlaneClicked();
+    void onCubeClicked();
+    void onTorusClicked();
+    void onLoadObjClicked();
 
 private:
     Ui::Widget *ui;
-    ModelView * mv;
+    ModelViewTabs * m_modelviewtabs;
+    ModelsDialog * m_modelsDialog;
 };
 
 #endif // MAINWINDOW_H

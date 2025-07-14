@@ -2,9 +2,11 @@
 #define MODELVIEW_H
 
 #include <QWidget>
+#include "Triangle.h"
+#include "TransformMatrix.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class Form; }
+namespace Ui { class ModelView; }
 QT_END_NAMESPACE
 
 class ModelView : public QWidget
@@ -14,11 +16,14 @@ class ModelView : public QWidget
 public:
     explicit ModelView(QWidget *parent = nullptr);
     ~ModelView();
-    void drawCircle();
+    void setUpToolBtns();
+    void draw(const std::vector<Triangle>& triangles) const;
+    QPoint getOrigin() const;
+
 
 
 private:
-    Ui::Form *ui;
+    Ui::ModelView *ui;
 };
 
 #endif // MODELVIEW_H
