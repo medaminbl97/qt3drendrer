@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Triangle.h"
+#include "Polygon.h"
 #include "Vec3.h"
 #include <cmath>
+#include <QPolygon>
+#include <QPoint>
 
 class TransformMatrix
 {
@@ -43,47 +45,79 @@ public:
         );
     }
 
-    // Rotate an entire triangle around X axis
-    static Triangle rotateTriangleX(const Triangle& tri, float angle)
+    // Rotate an entire polygon around X axis
+    static Polygon rotatePolygonX(const Polygon& poly, float angle)
     {
-        return Triangle(
-            rotateX(tri.v0, angle),
-            rotateX(tri.v1, angle),
-            rotateX(tri.v2, angle)
-        );
-    }
-
-    // Rotate an entire triangle around Y axis
-    static Triangle rotateTriangleY(const Triangle& tri, float angle)
-    {
-        return Triangle(
-            rotateY(tri.v0, angle),
-            rotateY(tri.v1, angle),
-            rotateY(tri.v2, angle)
-        );
-    }
-
-    // Rotate an entire triangle around Z axis
-    static Triangle rotateTriangleZ(const Triangle& tri, float angle)
-    {
-        return Triangle(
-            rotateZ(tri.v0, angle),
-            rotateZ(tri.v1, angle),
-            rotateZ(tri.v2, angle)
-        );
-    }
-
-    static QPolygon projectTo2D(const Triangle& tri, const QPoint& origin)
-        {
-            QPoint p0(origin.x() + static_cast<int>(tri.v0.x),
-                    origin.y() - static_cast<int>(tri.v0.y));
-            QPoint p1(origin.x() + static_cast<int>(tri.v1.x),
-                    origin.y() - static_cast<int>(tri.v1.y));
-            QPoint p2(origin.x() + static_cast<int>(tri.v2.x),
-                    origin.y() - static_cast<int>(tri.v2.y));
-
-            QPolygon polygon;
-            polygon << p0 << p1 << p2;
-            return polygon;
+        if (poly.isQuad) {
+            return Polygon(
+                rotateX(poly.v0, angle),
+                rotateX(poly.v1, angle),
+                rotateX(poly.v2, angle),
+                rotateX(poly.v3, angle)
+            );
+        } else {
+            return Polygon(
+                rotateX(poly.v0, angle),
+                rotateX(poly.v1, angle),
+                rotateX(poly.v2, angle)
+            );
         }
+    }
+
+    // Rotate an entire polygon around Y axis
+    static Polygon rotatePolygonY(const Polygon& poly, float angle)
+    {
+        if (poly.isQuad) {
+            return Polygon(
+                rotateY(poly.v0, angle),
+                rotateY(poly.v1, angle),
+                rotateY(poly.v2, angle),
+                rotateY(poly.v3, angle)
+            );
+        } else {
+            return Polygon(
+                rotateY(poly.v0, angle),
+                rotateY(poly.v1, angle),
+                rotateY(poly.v2, angle)
+            );
+        }
+    }
+
+    // Rotate an entire polygon around Z axis
+    static Polygon rotatePolygonZ(const Polygon& poly, float angle)
+    {
+        if (poly.isQuad) {
+            return Polygon(
+                rotateZ(poly.v0, angle),
+                rotateZ(poly.v1, angle),
+                rotateZ(poly.v2, angle),
+                rotateZ(poly.v3, angle)
+            );
+        } else {
+            return Polygon(
+                rotateZ(poly.v0, angle),
+                rotateZ(poly.v1, angle),
+                rotateZ(poly.v2, angle)
+            );
+        }
+    }
+
+    // Project polygon to 2D (returns QPolygon)
+    static QPolygon projectTo2D(const Polygon& poly, const QPoint& origin)
+    {
+        QPolygon qpoly;
+        qpoly << QPoint(origin.x() + static_cast<int>(poly.v0.x),
+                        origin.y() - static_cast<int>(poly.v0.y));
+        qpoly << QPoint(origin.x() + static_cast<int>(poly.v1.x),
+                        origin.y() - static_cast<int>(poly.v1.y));
+        qpoly << QPoint(origin.x() + static_cast<int>(poly.v2.x),
+                        origin.y() - static_cast<int>(poly.v2.y));
+
+        if (poly.isQuad) {
+            qpoly << QPoint(origin.x() + static_cast<int>(poly.v3.x),
+                            origin.y() - static_cast<int>(poly.v3.y));
+        }
+
+        return qpoly;
+    }
 };

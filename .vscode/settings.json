@@ -76,6 +76,7 @@
         "qobject": "cpp",
         "qdialog": "cpp",
         "qtreewidgetitem": "cpp",
-        "qtmath": "cpp"
+        "qtmath": "cpp",
+        "fstream": "cpp"
     }
 }

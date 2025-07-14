@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <iostream>
 #include "Plane.h"
+#include "ObjLoader.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -62,7 +63,6 @@ void Widget::onPlaneClicked()
 
 void Widget::onCubeClicked()
 {   
-
     qDebug() << "Cube button clicked!";
     QIcon icon(":/icons/cube.png");
     addModelItemToTree("Cube", icon,nullptr);
@@ -80,6 +80,8 @@ void Widget::onLoadObjClicked()
     qDebug() << "Load OBJ button clicked!";
     QIcon icon(":/icons/obj.png");
     addModelItemToTree("ObjModel", icon,nullptr);
+    ObjLoader loader;
+    loader.loadFile("D:/Tsc/other/qt3drenderer/cube.obj");
 }
 
 

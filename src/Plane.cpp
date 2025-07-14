@@ -1,6 +1,6 @@
 #include "Plane.h"
 #include "Vec3.h"
-#include "Triangle.h"
+#include "Polygon.h"
 
 Plane::Plane(const QString& name)
     : BaseModel(name)
@@ -11,12 +11,12 @@ Plane::Plane(const QString& name)
     Vec3 v2(0, 100, 0);
     Vec3 v3(100, 100, 0);
 
-    // Triangle 1: v0, v1, v2
-    Triangle t1(v0, v1, v2);
-    // Triangle 2: v2, v1, v3
-    Triangle t2(v2, v1, v3);
+    // Polygon 1: v0, v1, v2
+    Polygon t1(v0, v1, v2);
+    // Polygon 2: v2, v1, v3
+    Polygon t2(v2, v1, v3);
 
     // Add to base class vector
-    m_triangles.push_back(t1);
-    m_triangles.push_back(t2);
+    mesh.push_back(t1);
+    mesh.push_back(t2);
 }

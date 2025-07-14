@@ -26,32 +26,32 @@ BaseModel::~BaseModel() = default;
 
 void BaseModel::draw() const
 {
-    m_modelview->draw(m_triangles);
+    m_modelview->draw(mesh);
 }
 
 void BaseModel::rotateX(float angle) const
 {
     qDebug() << "Rotating around X axis!";
-    for (auto& tri : m_triangles)
+    for (auto& poly : mesh)
     {
-        TransformMatrix::rotateTriangleX(tri,angle);
+        TransformMatrix::rotatePolygonX(poly,angle);
     }
 }
 void BaseModel::rotateY(float angle) const
 {
     qDebug() << "Rotating around Y axis!";
-        for (auto& tri : m_triangles)
+        for (auto& poly : mesh)
     {
-        TransformMatrix::rotateTriangleY(tri,angle);
+        TransformMatrix::rotatePolygonY(poly,angle);
     }
 }
 
 void BaseModel::rotateZ(float angle) const
 {
     qDebug() << "Rotating around Z axis!";
-    for (auto& tri : m_triangles)
+    for (auto& poly : mesh)
     {
-        TransformMatrix::rotateTriangleZ(tri,angle);
+        TransformMatrix::rotatePolygonZ(poly,angle);
     }
 }
 
@@ -64,7 +64,7 @@ void BaseModel::loadModelFromOBJ(const std::string& path)
     // Find largest dimension (e.g., max(maxX - minX, maxY - minY, maxZ - minZ))
     // Compute scale factor to make largest dimension = 100
     // Apply scaling and offset so center is at (0, 0, 0)
-    // Store triangles in m_trangles
+    // Store mesh in m_trangles
 
     // Example placeholder logic
     // for each vertex v:

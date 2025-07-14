@@ -2,7 +2,7 @@
 #define MODELVIEW_H
 
 #include <QWidget>
-#include "Triangle.h"
+#include "Polygon.h"
 #include "TransformMatrix.h"
 
 QT_BEGIN_NAMESPACE
@@ -17,7 +17,7 @@ public:
     explicit ModelView(QWidget *parent = nullptr);
     ~ModelView();
     void setUpToolBtns();
-    void draw(const std::vector<Triangle>& triangles) const;
+    void draw(const std::vector<Polygon>& mesh) const;
     QPoint getOrigin() const;
 
 

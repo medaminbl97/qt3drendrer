@@ -3,7 +3,7 @@
 #include <QGraphicsView>
 #include <QTimer>
 #include <QPoint>
-#include "Triangle.h"
+#include "Polygon.h"
 #include "TransformMatrix.h"
 #include "ModelView.h"
 
@@ -13,7 +13,7 @@ public:
     QString m_name;
 protected:
     QTimer m_timer;
-    std::vector<Triangle> m_triangles;
+    std::vector<Polygon> mesh;
     ModelView * m_modelview;
     bool m_tabOpened;
 public:

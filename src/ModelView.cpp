@@ -20,9 +20,9 @@ void ModelView::setUpToolBtns(){
 }
 
 
-void ModelView::draw(const std::vector<Triangle>& triangles) const
+void ModelView::draw(const std::vector<Polygon>& mesh) const
 {
-    qDebug() << "Drawing triangles!";
+    qDebug() << "Drawing mesh!";
     if (!ui->graphicsView) {
         qWarning() << "Graphics view is null!";
         return;
@@ -38,7 +38,7 @@ void ModelView::draw(const std::vector<Triangle>& triangles) const
 
     QPoint origin = getOrigin();
 
-    for (const auto& tri : triangles)
+    for (const auto& tri : mesh)
     {
         // if (!tri.isVisible())
         //     continue;
