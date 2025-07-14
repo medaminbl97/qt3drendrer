@@ -24,3 +24,8 @@ void ModelViewTabs::addTab(ModelView * new_tab, const QString& name){
         ui->tabWidget->addTab(new_tab,name);
     }
 }
+
+int ModelViewTabs::currentIndex() const
+{
+    return ui->tabWidget->currentIndex();
+}

@@ -86,6 +86,8 @@
         "xlocmes": "cpp",
         "xlocmon": "cpp",
         "xloctime": "cpp",
-        "qstring": "cpp"
+        "qstring": "cpp",
+        "qinputdialog": "cpp",
+        "qlineedit": "cpp"
     }
 }

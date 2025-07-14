@@ -15,7 +15,7 @@ public:
     explicit ModelViewTabs(QWidget *parent = nullptr);
     ~ModelViewTabs();
     void addTab(ModelView * new_tab, const QString& name);
-
+    int currentIndex()const;
 
 
 private:

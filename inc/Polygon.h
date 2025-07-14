@@ -17,5 +17,6 @@ public:
     Polygon(const Vec3& a, const Vec3& b, const Vec3& c, const Vec3& d);
 
     Vec3 normal() const;
+    void normalize(float max);
     bool isVisible() const;
 };

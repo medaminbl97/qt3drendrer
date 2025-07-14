@@ -23,6 +23,18 @@ Vec3 Polygon::normal() const
     return edge1.cross(edge2).normalized();
 }
 
+void Polygon::normalize(float max)
+{
+    float canva_w = 250;
+    float ratio = max / canva_w;
+    v0 = v0 * (1/ratio);
+    v1 = v1 * (1/ratio);
+    v2 = v2 * (1/ratio);
+    if(isQuad){
+        v3 = v3 * (1/ratio);
+    }
+}
+
 bool Polygon::isVisible() const
 {
     Vec3 n = normal();

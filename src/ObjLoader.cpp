@@ -17,6 +17,7 @@ bool ObjLoader::loadFile(const std::string &path)
 
     vertices.clear();
     mesh->clear();
+    float max = 0;
 
     std::string line;
     while (std::getline(file, line)) {
@@ -27,6 +28,9 @@ bool ObjLoader::loadFile(const std::string &path)
         if (prefix == "v") {
             float x, y, z;
             iss >> x >> y >> z;
+            float current_max = std::abs(std::max(x, std::max(y, z)));
+            max = current_max > max ? current_max : max;
+
             vertices.emplace_back(x, y, z);
         } else if (prefix == "f") {
             std::vector<int> indices;
@@ -36,6 +40,9 @@ bool ObjLoader::loadFile(const std::string &path)
                 std::istringstream viss(vertStr);
                 std::string vIdxStr;
                 std::getline(viss, vIdxStr, '/');
+                if (vIdxStr == "#"){
+                    break;
+                }
                 int vIdx = std::stoi(vIdxStr);
                 indices.push_back(vIdx - 1); // OBJ indices start at 1
             }
@@ -59,6 +66,12 @@ bool ObjLoader::loadFile(const std::string &path)
         }
     }
 
+    for(auto& poly : *mesh){
+        poly.normalize(max);
+    }
+
     file.close();
     return true;
 }
+
+

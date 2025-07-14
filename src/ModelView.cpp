@@ -4,7 +4,7 @@
 
 ModelView::ModelView(QWidget *parent)
     : QWidget(parent)
-    , ui(new Ui::ModelView)
+    , ui(new Ui::ModelView), m_tabActive(false)
 {
     ui->setupUi(this);
     setUpToolBtns();
@@ -20,9 +20,9 @@ void ModelView::setUpToolBtns(){
 }
 
 
-void ModelView::draw(const std::vector<Polygon>& mesh) const
+void ModelView::draw(const std::vector<Polygon>& mesh, const QString& model_name) const
 {
-    qDebug() << "Drawing mesh!";
+    qDebug() << "Drawing mesh for!" + model_name;
     if (!ui->graphicsView) {
         qWarning() << "Graphics view is null!";
         return;
@@ -66,3 +66,18 @@ ModelView::~ModelView()
 }
 
 
+bool ModelView::isActive() const{
+    return m_tabActive;
+}
+
+
+void ModelView::showEvent(QShowEvent *event)
+{
+    m_tabActive = true;
+}
+
+void ModelView::hideEvent(QHideEvent *event)
+{
+    m_tabActive = false;
+
+}

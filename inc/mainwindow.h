@@ -3,8 +3,9 @@
 
 #include <iostream>
 #include <vector>
-
+#include <mutex>
 #include <QWidget>
+#include <QTimer>
 #include <QTreeWidgetItem>
 #include "ModelViewTabs.h"
 #include "ModelsDialog.h"
@@ -17,12 +18,17 @@ class Widget : public QWidget
 {
     Q_OBJECT
     std::vector< BaseModel* > m_models;
+    QTimer m_timer;
+    std::mutex m_modelsMutex; 
 public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
     void onAddModelBtnClicked();
     void addModelItemToTree(const QString &name, const QIcon &icon, BaseModel *model);
     void onModelItemClicked(QTreeWidgetItem *item, int column);
+    void update();
+    void addModel( BaseModel* model);
+    QString askForModelName(const QString& defaultValue = "YourModelName");
 
 
 

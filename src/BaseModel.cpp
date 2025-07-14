@@ -8,13 +8,22 @@
 
 
 
-BaseModel::BaseModel(const QString& name) :  m_name(name), m_tabOpened(false)
+BaseModel::BaseModel(const QString& name)
+ :  m_name(name), m_tabOpened(false), m_modelview(new ModelView())//, m_running(false), m_singleShotMode(false)
 {   
 }
 
 void BaseModel::setTabOpened(bool value)
 {
     m_tabOpened = value;
+}
+
+bool BaseModel::isTabActive() const
+{   
+    if(m_modelview){
+        return m_modelview->isActive();
+    }
+    return false;
 }
 
 bool BaseModel::isTabOpened() const
@@ -26,7 +35,7 @@ BaseModel::~BaseModel() = default;
 
 void BaseModel::draw() const
 {
-    m_modelview->draw(mesh);
+    m_modelview->draw(mesh,m_name);
 }
 
 void BaseModel::rotateX(float angle)
@@ -56,26 +65,65 @@ void BaseModel::rotateZ(float angle)
 }
 
 
-
-void BaseModel::loadModelFromOBJ(const std::string& path)
-{
-    // Parse .obj
-    // Compute bounding box (minX, maxX, minY, maxY, minZ, maxZ)
-    // Find largest dimension (e.g., max(maxX - minX, maxY - minY, maxZ - minZ))
-    // Compute scale factor to make largest dimension = 100
-    // Apply scaling and offset so center is at (0, 0, 0)
-    // Store mesh in m_trangles
-
-    // Example placeholder logic
-    // for each vertex v:
-    // v.x = (v.x - centerX) * scale
-    // v.y = (v.y - centerY) * scale
-    // v.z = (v.z - centerZ) * scale
-}
-
 ModelView *BaseModel::getTab()
 {   
-    m_modelview = new ModelView();
     m_modelview->setObjectName("Model Tab");
     return m_modelview;
 }
+
+
+
+// void BaseModel::startWorker(bool singleShot, std::function<void()> func)
+// {
+//     if (m_running.load()) {
+//         qDebug() << "Worker already running";
+//         return;
+//     }
+
+//     m_singleShotMode = singleShot;
+//     m_singleShotFunc = func;
+//     m_running = true;
+
+//     m_workerThread = std::make_unique<std::thread>(&BaseModel::workerLoop, this);
+// }
+
+// void BaseModel::stopWorker()
+// {
+//     if (m_running.load()) {
+//         m_running = false;
+//         if (m_workerThread && m_workerThread->joinable()) {
+//             m_workerThread->join();
+//         }
+//     }
+// }
+
+// void BaseModel::workerLoop()
+// {
+//     if (m_singleShotMode && m_singleShotFunc) {
+//         {
+//             std::lock_guard<std::mutex> lock(m_meshMutex);
+//             m_singleShotFunc();
+//         }
+
+//         if (m_modelview) {
+//             QMetaObject::invokeMethod(m_modelview, "update", Qt::QueuedConnection);
+//         }
+
+//         m_running = false;
+//         return;
+//     }
+
+//     while (m_running.load()) {
+//         {
+//             std::lock_guard<std::mutex> lock(m_meshMutex);
+//             // Example: continuous rotation
+//             this->rotateY(0.05f);
+//         }
+
+//         if (m_modelview) {
+//             QMetaObject::invokeMethod(m_modelview, "update", Qt::QueuedConnection);
+//         }
+
+//         std::this_thread::sleep_for(std::chrono::milliseconds(30));
+//     }
+// }
