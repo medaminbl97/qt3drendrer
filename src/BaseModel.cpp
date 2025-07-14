@@ -29,7 +29,7 @@ void BaseModel::draw() const
     m_modelview->draw(mesh);
 }
 
-void BaseModel::rotateX(float angle) const
+void BaseModel::rotateX(float angle)
 {
     qDebug() << "Rotating around X axis!";
     for (auto& poly : mesh)
@@ -37,7 +37,7 @@ void BaseModel::rotateX(float angle) const
         TransformMatrix::rotatePolygonX(poly,angle);
     }
 }
-void BaseModel::rotateY(float angle) const
+void BaseModel::rotateY(float angle)
 {
     qDebug() << "Rotating around Y axis!";
         for (auto& poly : mesh)
@@ -46,7 +46,7 @@ void BaseModel::rotateY(float angle) const
     }
 }
 
-void BaseModel::rotateZ(float angle) const
+void BaseModel::rotateZ(float angle)
 {
     qDebug() << "Rotating around Z axis!";
     for (auto& poly : mesh)

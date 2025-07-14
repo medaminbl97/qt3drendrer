@@ -38,11 +38,11 @@ void ModelView::draw(const std::vector<Polygon>& mesh) const
 
     QPoint origin = getOrigin();
 
-    for (const auto& tri : mesh)
+    for (const auto& poly : mesh)
     {
         // if (!tri.isVisible())
         //     continue;
-        QPolygon polygon = TransformMatrix::projectTo2D(tri, origin);
+        QPolygon polygon = TransformMatrix::projectTo2D(poly, origin);
         painter.drawPolygon(polygon);
     }
 

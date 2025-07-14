@@ -3,7 +3,11 @@
 #include <sstream>
 #include <iostream>
 
-bool ObjLoader::loadFile(const std::string& path)
+ObjLoader::ObjLoader(std::vector<Polygon> *mesh) : mesh(mesh)
+{
+}
+
+bool ObjLoader::loadFile(const std::string &path)
 {
     std::ifstream file(path);
     if (!file.is_open()) {
@@ -12,7 +16,7 @@ bool ObjLoader::loadFile(const std::string& path)
     }
 
     vertices.clear();
-    mesh.clear();
+    mesh->clear();
 
     std::string line;
     while (std::getline(file, line)) {
@@ -37,13 +41,13 @@ bool ObjLoader::loadFile(const std::string& path)
             }
 
             if (indices.size() == 3) {
-                mesh.emplace_back(
+                mesh->emplace_back(
                     vertices[indices[0]],
                     vertices[indices[1]],
                     vertices[indices[2]]
                 );
             } else if (indices.size() == 4) {
-                mesh.emplace_back(
+                mesh->emplace_back(
                     vertices[indices[0]],
                     vertices[indices[1]],
                     vertices[indices[2]],
@@ -57,10 +61,4 @@ bool ObjLoader::loadFile(const std::string& path)
 
     file.close();
     return true;
-}
-
-
-const std::vector<Polygon>& ObjLoader::getMesh() const
-{
-    return mesh;
 }

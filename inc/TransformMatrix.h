@@ -46,17 +46,17 @@ public:
     }
 
     // Rotate an entire polygon around X axis
-    static Polygon rotatePolygonX(const Polygon& poly, float angle)
+    static void rotatePolygonX(Polygon& poly, float angle)
     {
         if (poly.isQuad) {
-            return Polygon(
+            poly = Polygon(
                 rotateX(poly.v0, angle),
                 rotateX(poly.v1, angle),
                 rotateX(poly.v2, angle),
                 rotateX(poly.v3, angle)
             );
         } else {
-            return Polygon(
+            poly = Polygon(
                 rotateX(poly.v0, angle),
                 rotateX(poly.v1, angle),
                 rotateX(poly.v2, angle)
@@ -65,17 +65,17 @@ public:
     }
 
     // Rotate an entire polygon around Y axis
-    static Polygon rotatePolygonY(const Polygon& poly, float angle)
+    static void rotatePolygonY(Polygon& poly, float angle)
     {
         if (poly.isQuad) {
-            return Polygon(
+            poly = Polygon(
                 rotateY(poly.v0, angle),
                 rotateY(poly.v1, angle),
                 rotateY(poly.v2, angle),
                 rotateY(poly.v3, angle)
             );
         } else {
-            return Polygon(
+            poly = Polygon(
                 rotateY(poly.v0, angle),
                 rotateY(poly.v1, angle),
                 rotateY(poly.v2, angle)
@@ -84,17 +84,17 @@ public:
     }
 
     // Rotate an entire polygon around Z axis
-    static Polygon rotatePolygonZ(const Polygon& poly, float angle)
+    static void rotatePolygonZ(Polygon& poly, float angle)
     {
         if (poly.isQuad) {
-            return Polygon(
+            poly = Polygon(
                 rotateZ(poly.v0, angle),
                 rotateZ(poly.v1, angle),
                 rotateZ(poly.v2, angle),
                 rotateZ(poly.v3, angle)
             );
         } else {
-            return Polygon(
+            poly = Polygon(
                 rotateZ(poly.v0, angle),
                 rotateZ(poly.v1, angle),
                 rotateZ(poly.v2, angle)

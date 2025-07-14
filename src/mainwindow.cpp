@@ -1,8 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
+#include <QFileDialog>
 #include "Plane.h"
 #include "ObjLoader.h"
+#include "ObjModel.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
@@ -79,9 +81,16 @@ void Widget::onLoadObjClicked()
 {
     qDebug() << "Load OBJ button clicked!";
     QIcon icon(":/icons/obj.png");
-    addModelItemToTree("ObjModel", icon,nullptr);
-    ObjLoader loader;
-    loader.loadFile("D:/Tsc/other/qt3drenderer/cube.obj");
+    QString filePath = QFileDialog::getOpenFileName(
+    this,                              
+    "Select OBJ File",                 
+    "",                                
+    "OBJ Files (*.obj);;All Files (*)" 
+);
+
+    ObjModel * obj_model = new ObjModel("OBJ Model", filePath.toStdString());
+    m_models.push_back(obj_model);
+    addModelItemToTree("ObjModel", icon,obj_model);
 }
 
 

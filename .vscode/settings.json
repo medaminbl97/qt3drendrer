@@ -77,6 +77,15 @@
         "qdialog": "cpp",
         "qtreewidgetitem": "cpp",
         "qtmath": "cpp",
-        "fstream": "cpp"
+        "fstream": "cpp",
+        "qfiledialog": "cpp",
+        "filesystem": "cpp",
+        "iomanip": "cpp",
+        "locale": "cpp",
+        "xlocbuf": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xloctime": "cpp",
+        "qstring": "cpp"
     }
 }

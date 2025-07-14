@@ -24,9 +24,9 @@ public:
     void setTabOpened(bool value);
     virtual ~BaseModel() = 0;
     virtual void draw() const;
-    virtual void rotateX(float angle) const;
-    virtual void rotateY(float angle) const;
-    virtual void rotateZ(float angle) const;
+    virtual void rotateX(float angle);
+    virtual void rotateY(float angle);
+    virtual void rotateZ(float angle);
 
 private:
     QPoint getOrigin() const;

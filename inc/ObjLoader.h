@@ -9,11 +9,10 @@ class ObjLoader
 {
 private:
     std::vector<Vec3> vertices;
-    std::vector<Polygon> mesh;
+    std::vector<Polygon> * mesh;
 
 public:
-    ObjLoader() = default;
+    ObjLoader(std::vector<Polygon> * mesh);
 
     bool loadFile(const std::string& path);
-    const std::vector<Polygon>& getMesh() const;
 };
