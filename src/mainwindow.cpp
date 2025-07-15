@@ -64,7 +64,7 @@ void Widget::onAddModelBtnClicked()
     connect(m_modelsDialog, &ModelsDialog::cubeClicked, this, &Widget::onCubeClicked);
     connect(m_modelsDialog, &ModelsDialog::torusClicked, this, &Widget::onTorusClicked);
     connect(m_modelsDialog, &ModelsDialog::loadObjClicked, this, &Widget::onLoadObjClicked);
-    connect(m_modelsDialog, &ModelsDialog::pyramidClicked, this, &Widget::onPyramidClicked);
+    connect(m_modelsDialog, &ModelsDialog::coneClicked, this, &Widget::onconeClicked);
     m_modelsDialog->show();
     qDebug() << "Add Model button clicked!";
 }
@@ -123,14 +123,14 @@ void Widget::onTorusClicked()
     addModelItemToTree(name, icon,torus_model);
 }
 
-void Widget::onPyramidClicked()
+void Widget::onconeClicked()
 {
-    QString name = askForModelName("PyramidModel");
-    qDebug() << "Pyramid button clicked!";
-    BaseModel * pyramid_model =  new Pyramid(name);
-    addModel(pyramid_model);
-    QIcon icon(":/icons/pyramid.png");
-    addModelItemToTree(name, icon,pyramid_model);
+    QString name = askForModelName("coneModel");
+    qDebug() << "cone button clicked!";
+    BaseModel * cone_model =  new Cone(name);
+    addModel(cone_model);
+    QIcon icon(":/icons/cone.png");
+    addModelItemToTree(name, icon,cone_model);
 }
 
 void Widget::onLoadObjClicked()

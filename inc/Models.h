@@ -16,11 +16,11 @@ public:
     ~Cube() override = default;
 };
 
-class Pyramid : public BaseModel
+class Cone : public BaseModel
 {
 public:
-    Pyramid(const QString& name);
-    ~Pyramid() override = default;
+    Cone(const QString& name);
+    ~Cone() override = default;
 };
 
 class Torus : public BaseModel

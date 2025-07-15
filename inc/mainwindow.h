@@ -39,7 +39,7 @@ private slots:
     void onCubeClicked();
     void onTorusClicked();
     void onLoadObjClicked();
-    void onPyramidClicked();
+    void onconeClicked();
 
 
 private:

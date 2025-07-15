@@ -23,7 +23,7 @@
       <item row="1" column="1">
        <widget class="QPushButton" name="pyramidBtn">
         <property name="text">
-         <string>Pyramid</string>
+         <string>cone</string>
         </property>
        </widget>
       </item>

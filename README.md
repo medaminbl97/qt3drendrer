@@ -19,7 +19,7 @@ All rendering is performed on the CPU, without using GPU acceleration. The appli
 
 - Load and display 3D models (OBJ format supported)
 - Interactive 3D view with rotation, zoom, and pan
-- Multiple model types: Cube, Pyramid, Plane, Polygon, etc.
+- Multiple model types: Cube, cone, Plane, Polygon, etc.
 - Tabbed interface for managing multiple models
 - Dialogs for model selection
 
@@ -41,7 +41,7 @@ All rendering is performed on the CPU, without using GPU acceleration. The appli
 - `inc/` - Header files
 - `icons/` - UI icons
 - `build/` - Build output
-- `cube.obj`, `Pyramid.obj` - Sample 3D models
+- `cube.obj`, `cone.obj` - Sample 3D models
 
 ## Requirements
 

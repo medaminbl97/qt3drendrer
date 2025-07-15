@@ -10,7 +10,7 @@ ModelsDialog::ModelsDialog(QWidget *parent)
     connect(ui->planeBtn, &QPushButton::clicked, this, &ModelsDialog::planeClicked);
     connect(ui->cubeBtn, &QPushButton::clicked, this, &ModelsDialog::cubeClicked);
     connect(ui->torusBtn, &QPushButton::clicked, this, &ModelsDialog::torusClicked);
-    connect(ui->pyramidBtn, &QPushButton::clicked, this, &ModelsDialog::pyramidClicked);
+    connect(ui->pyramidBtn, &QPushButton::clicked, this, &ModelsDialog::coneClicked);
     connect(ui->loadObjBtn, &QPushButton::clicked, this, &ModelsDialog::loadObjClicked);
 }
 

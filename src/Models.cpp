@@ -30,31 +30,31 @@ Plane::Plane(const QString& name)
 Cube::Cube(const QString& name)
     : BaseModel(name)
 {
-    // Vertices
-    Vec3 v0(-0.5f, -0.5f, -0.5f);
-    Vec3 v1(0.5f, -0.5f, -0.5f);
-    Vec3 v2(0.5f, 0.5f, -0.5f);
-    Vec3 v3(-0.5f, 0.5f, -0.5f);
-    Vec3 v4(-0.5f, -0.5f, 0.5f);
-    Vec3 v5(0.5f, -0.5f, 0.5f);
-    Vec3 v6(0.5f, 0.5f, 0.5f);
-    Vec3 v7(-0.5f, 0.5f, 0.5f);
+    Vec3 v1(1.0f, 1.0f, -1.0f);
+    Vec3 v2(1.0f, -1.0f, -1.0f);
+    Vec3 v3(1.0f, 1.0f, 1.0f);
+    Vec3 v4(1.0f, -1.0f, 1.0f);
+    Vec3 v5(-1.0f, 1.0f, -1.0f);
+    Vec3 v6(-1.0f, -1.0f, -1.0f);
+    Vec3 v7(-1.0f, 1.0f, 1.0f);
+    Vec3 v8(-1.0f, -1.0f, 1.0f);
 
-    mesh.emplace_back(v4, v5, v6, v7); // Front
-    mesh.emplace_back(v0, v1, v2, v3); // Back
-    mesh.emplace_back(v0, v3, v7, v4); // Left
-    mesh.emplace_back(v1, v2, v6, v5); // Right
-    mesh.emplace_back(v3, v2, v6, v7); // Top
-    mesh.emplace_back(v0, v1, v5, v4); // Bottom
+    mesh.emplace_back(v1, v5, v7, v3);
+    mesh.emplace_back(v4, v3, v7, v8);
+    mesh.emplace_back(v8, v7, v5, v6);
+    mesh.emplace_back(v6, v2, v4, v8);
+    mesh.emplace_back(v2, v1, v3, v4);
+    mesh.emplace_back(v6, v5, v1, v2);
+
 
     for(auto& poly : mesh){
-        poly.normalize(0.5f);
+        poly.normalize(1);
     }
 }
 
-// ---- PYRAMID ----
+// ---- Cone ----
 
-Pyramid::Pyramid(const QString& name)
+Cone::Cone(const QString& name)
     : BaseModel(name)
 {
     Vec3 v0(-0.5f, 0.0f, -0.5f);

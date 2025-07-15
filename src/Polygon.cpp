@@ -24,7 +24,7 @@ Vec3 Polygon::normal() const
 
 void Polygon::normalize(float max)
 {
-    float canva_w = 150;
+    float canva_w = 250;
     float ratio = max / canva_w;
     v0 = v0 * (1/ratio);
     v1 = v1 * (1/ratio);
