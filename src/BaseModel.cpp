@@ -19,11 +19,8 @@ void BaseModel::setTabOpened(bool value)
 }
 
 bool BaseModel::isTabActive() const
-{   
-    if(m_modelview){
-        return m_modelview->isActive();
-    }
-    return false;
+{
+    return m_modelview->isActive();
 }
 
 bool BaseModel::isTabOpened() const
@@ -33,13 +30,15 @@ bool BaseModel::isTabOpened() const
 
 BaseModel::~BaseModel() = default;
 
-void BaseModel::draw() const
+void BaseModel::draw(const Vec3& light)
 {
-    m_modelview->draw(mesh,m_name);
+    m_modelview->draw(mesh,m_name,light);
 }
 
 void BaseModel::rotateX(float angle)
 {
+    if(!m_modelview->rotatex) return;
+    m_modelview->rotateGizmo("X",angle);
     qDebug() << "Rotating around X axis!";
     for (auto& poly : mesh)
     {
@@ -48,6 +47,8 @@ void BaseModel::rotateX(float angle)
 }
 void BaseModel::rotateY(float angle)
 {
+    if(!m_modelview->rotatey) return;
+    m_modelview->rotateGizmo("Y",angle);
     qDebug() << "Rotating around Y axis!";
         for (auto& poly : mesh)
     {
@@ -57,6 +58,9 @@ void BaseModel::rotateY(float angle)
 
 void BaseModel::rotateZ(float angle)
 {
+    if(!m_modelview->rotatez) return;
+    m_modelview->rotateGizmo("Z",angle);
+
     qDebug() << "Rotating around Z axis!";
     for (auto& poly : mesh)
     {

@@ -1,7 +1,6 @@
 #include "Polygon.h"
 
-Polygon::Polygon()
-    : v0(), v1(), v2(), v3(), isQuad(false)
+Polygon::Polygon(): v0(), v1(), v2(), v3(), isQuad(false)
 {
 }
 
@@ -25,7 +24,7 @@ Vec3 Polygon::normal() const
 
 void Polygon::normalize(float max)
 {
-    float canva_w = 250;
+    float canva_w = 150;
     float ratio = max / canva_w;
     v0 = v0 * (1/ratio);
     v1 = v1 * (1/ratio);
@@ -42,5 +41,5 @@ bool Polygon::isVisible() const
 
     float dotProd = n.dot(cameraDir);
 
-    return dotProd >= 0.0f; // Visible if facing camera
+    return dotProd < 0.0f; // Visible if facing camera
 }

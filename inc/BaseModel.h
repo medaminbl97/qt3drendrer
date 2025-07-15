@@ -10,6 +10,7 @@
 #include "Polygon.h"
 #include "TransformMatrix.h"
 #include "ModelView.h"
+#include "QColor.h"
 
 class BaseModel
 {
@@ -35,8 +36,9 @@ public:
     bool isTabOpened() const;
     void setTabOpened(bool value);
     bool isTabActive()const;
+    QColor getColor()const;
     virtual ~BaseModel() = 0;
-    virtual void draw() const;
+    virtual void draw(const Vec3& light);
     virtual void rotateX(float angle);
     virtual void rotateY(float angle);
     virtual void rotateZ(float angle);

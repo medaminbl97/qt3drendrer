@@ -88,6 +88,8 @@
         "xloctime": "cpp",
         "qstring": "cpp",
         "qinputdialog": "cpp",
-        "qlineedit": "cpp"
+        "qlineedit": "cpp",
+        "qcolordialog": "cpp",
+        "qpushbutton": "cpp"
     }
 }

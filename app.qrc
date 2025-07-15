@@ -8,5 +8,7 @@
         <file>icons/rx.png</file>
         <file>icons/ry.png</file>
         <file>icons/rz.png</file>
+        <file>icons/col.png</file>
+        <file>icons/pyramid.png</file>
     </qresource>
 </RCC>

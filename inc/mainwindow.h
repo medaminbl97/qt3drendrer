@@ -10,6 +10,7 @@
 #include "ModelViewTabs.h"
 #include "ModelsDialog.h"
 #include "BaseModel.h"
+#include "Vec3.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class Widget; }
 QT_END_NAMESPACE
@@ -20,6 +21,7 @@ class Widget : public QWidget
     std::vector< BaseModel* > m_models;
     QTimer m_timer;
     std::mutex m_modelsMutex; 
+    Vec3 lightDir;
 public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
@@ -37,6 +39,8 @@ private slots:
     void onCubeClicked();
     void onTorusClicked();
     void onLoadObjClicked();
+    void onPyramidClicked();
+
 
 private:
     Ui::Widget *ui;

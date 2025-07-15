@@ -18,6 +18,7 @@ public: signals:
     void planeClicked();
     void cubeClicked();
     void torusClicked();
+    void pyramidClicked();
     void loadObjClicked();
 
 private:

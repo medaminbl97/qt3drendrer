@@ -2,16 +2,19 @@
 #include "ui_mainwindow.h"
 #include <iostream>
 #include <QFileDialog>
+#include <QFileDialog>
 #include <QInputDialog>
 #include <QLineEdit>
-#include "Plane.h"
+#include "Models.h"
 #include "ObjLoader.h"
 #include "ObjModel.h"
+#include "ModelView.h"
 
 Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget),
-    m_modelviewtabs(new ModelViewTabs(this))
+    m_modelviewtabs(new ModelViewTabs(this)),
+    lightDir(0.0f, 0.0f, -1.0f)
 {
     ui->setupUi(this);
     m_timer.setInterval(33); // ~33 ms → about 30 FPS (1000 ms / 30 ≈ 33.3)
@@ -22,6 +25,7 @@ Widget::Widget(QWidget *parent)
     QIcon icon(":/icons/3d-model.png");
     rootItem->setText(0, "Models");
     rootItem->setIcon(0, icon);
+    ui->modelsTree->setIconSize(QSize(30, 30));  // Example: 48x48 icon
     ui->modelsTree->addTopLevelItem(rootItem);
     ui->modelsTree->setHeaderHidden(true);
     connect(ui->modelsTree, &QTreeWidget::itemClicked, this, &Widget::onModelItemClicked);
@@ -34,10 +38,10 @@ void Widget::update(){
     std::lock_guard<std::mutex> lock(m_modelsMutex);
     for(auto model : m_models){
         if (model->isTabActive()){
-            model->rotateY(5.0 / 180 * M_PI);
-            model->rotateX(5.0 / 180 * M_PI);
-            model->rotateZ(5.0 / 180 * M_PI);
-            model->draw();
+            model->rotateY(1.0 / 180 * M_PI);
+            model->rotateX(1.0 / 180 * M_PI);
+            model->rotateZ(1.0 / 180 * M_PI);
+            model->draw(lightDir);
         }
     }
 }
@@ -60,6 +64,7 @@ void Widget::onAddModelBtnClicked()
     connect(m_modelsDialog, &ModelsDialog::cubeClicked, this, &Widget::onCubeClicked);
     connect(m_modelsDialog, &ModelsDialog::torusClicked, this, &Widget::onTorusClicked);
     connect(m_modelsDialog, &ModelsDialog::loadObjClicked, this, &Widget::onLoadObjClicked);
+    connect(m_modelsDialog, &ModelsDialog::pyramidClicked, this, &Widget::onPyramidClicked);
     m_modelsDialog->show();
     qDebug() << "Add Model button clicked!";
 }
@@ -87,9 +92,9 @@ void Widget::onPlaneClicked()
 {
     QString name = askForModelName("PlanModel");
     BaseModel * plane_model =  new Plane(name);
+    addModel(plane_model);
     qDebug() << "Plane Model Created!";
 
-    addModel(plane_model);
 
     qDebug() << "Plane Model Pushed Back!";
 
@@ -102,16 +107,30 @@ void Widget::onCubeClicked()
 {   
     QString name = askForModelName("CubeModel");
     qDebug() << "Cube button clicked!";
+    BaseModel * cube_model =  new Cube(name);
+    addModel(cube_model);
     QIcon icon(":/icons/cube.png");
-    addModelItemToTree(name, icon,nullptr);
+    addModelItemToTree(name, icon,cube_model);
 }
 
 void Widget::onTorusClicked()
 {
     QString name = askForModelName("TorusModel");
     qDebug() << "Torus button clicked!";
+    BaseModel * torus_model =  new Torus(name);
+    addModel(torus_model);
     QIcon icon(":/icons/torus.png");
-    addModelItemToTree(name, icon,nullptr);
+    addModelItemToTree(name, icon,torus_model);
+}
+
+void Widget::onPyramidClicked()
+{
+    QString name = askForModelName("PyramidModel");
+    qDebug() << "Pyramid button clicked!";
+    BaseModel * pyramid_model =  new Pyramid(name);
+    addModel(pyramid_model);
+    QIcon icon(":/icons/pyramid.png");
+    addModelItemToTree(name, icon,pyramid_model);
 }
 
 void Widget::onLoadObjClicked()
@@ -140,7 +159,10 @@ void Widget::addModelItemToTree(const QString &name, const QIcon &icon, BaseMode
 
     QTreeWidgetItem *childItem = new QTreeWidgetItem();
     childItem->setText(0, name);
+    
     childItem->setIcon(0, icon);
+
+
     if(model){
         childItem->setData(0, Qt::UserRole, QVariant::fromValue(static_cast<void *>(model)));
     }
