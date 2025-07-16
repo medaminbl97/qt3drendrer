@@ -90,6 +90,7 @@
         "qinputdialog": "cpp",
         "qlineedit": "cpp",
         "qcolordialog": "cpp",
-        "qpushbutton": "cpp"
+        "qpushbutton": "cpp",
+        "qapplication": "cpp"
     }
 }

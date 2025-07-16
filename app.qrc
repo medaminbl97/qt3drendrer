@@ -10,5 +10,8 @@
         <file>icons/rz.png</file>
         <file>icons/col.png</file>
         <file>icons/pyramid.png</file>
+        <file>styles.qss</file>
+        <file>TCobra.qss</file>
+        <file>Medize.qss</file>
     </qresource>
 </RCC>

@@ -14,7 +14,7 @@ Widget::Widget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::Widget),
     m_modelviewtabs(new ModelViewTabs(this)),
-    lightDir(0.0f, 0.0f, -1.0f)
+    lightDir(0.0f, 0.0f, 1.0f)
 {
     ui->setupUi(this);
     m_timer.setInterval(33); // ~33 ms → about 30 FPS (1000 ms / 30 ≈ 33.3)

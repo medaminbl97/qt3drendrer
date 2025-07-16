@@ -145,23 +145,35 @@ void ModelView::draw(const std::vector<Polygon>& mesh, const QString& model_name
     
     QPainter painter(&pixmap);
     painter.setRenderHint(QPainter::Antialiasing);
-    // painter.setPen(Qt::NoPen);
-    painter.setPen(Qt::black);
+    drawGizmo(painter);
+    painter.setPen(Qt::NoPen);
+    // painter.setPen(Qt::black);
     
     QPoint origin = getOrigin();
-    drawGizmo(painter);
     for (const auto& poly : mesh)
     {   
         //printPolygonInfo(poly);
         if (!poly.isVisible())
             continue;
-        float intensity = poly.normal().dot(light.normalized());
-        painter.setBrush(m_color);
-        // painter.setBrush(QColor(
-        //     intensity * m_color.red() + 10,
-        //     intensity * m_color.green() +10 ,
-        //     intensity * m_color.blue() +10
-        // ));
+        float diffuse = poly.normal().normalized().dot(light.normalized());
+        qDebug() << "Intensity : " << diffuse;
+        
+        diffuse = std::max(0.0f, diffuse);
+
+        // Calculate new RGB
+        int r = static_cast<int>(m_color.red()   * diffuse);
+        int g = static_cast<int>(m_color.green() * diffuse);
+        int b = static_cast<int>(m_color.blue()  * diffuse);
+
+        // You can also clamp min diffuse to avoid going completely black if desired
+        // float minDiffuse = 0.2f;
+        // diffuse = std::max(diffuse, minDiffuse);
+
+        QColor shadedColor(r, g, b, m_color.alpha());
+
+        // Use it in painter
+        painter.setBrush(shadedColor);
+
         QPolygon polygon = TransformMatrix::projectTo2D(poly, origin);
         painter.drawPolygon(polygon);
     }
